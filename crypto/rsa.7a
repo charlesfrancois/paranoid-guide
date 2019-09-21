@@ -1,0 +1,231 @@
+.TH RSA 7a "Setembro 10, 2019" "FHOS 0.1" "Paranoid Information Manual"
+.SH NOME
+.BR "rsa" " - criptografia RSA (Rivest-Shamir-Adleman)"
+.SH FATORIAL
+\&\n
+.SS Definição
+.IR "n" "\fB!\fR = 2 * 3 * ... * " "n" " - 1 * " "n"
+\n
+.RI "O fatorial de um número natural " "n" ", representado por " "n\fB!\fR" ", é o produto de todos os inteiros positivos menores ou iguais a " "n" "."
+.SS Propriedade
+.I "0\fB!\fR = 1"
+\n
+.RI "É o produto vazio, isto é, o resultado da multiplicação de nenhum número é 1."
+.SS Exemplos
+.R \&
+\n
+.EX
+.I "3\fB!\fR = 2 * 3 = 6"
+.I "5\fB!\fR = 2 * 3 * 4 * 5 = 120"
+.EE
+.SH TEOREMA DE WILSON
+\&\n
+.SS Definição
+.EX
+.RI "(" "p" " - 1)! = -1 mod " "p"
+.RI "[(" "p" " - 1)! + 1] % " "p" " = 0"
+.EE
+\n
+.RI "Um inteiro " "p" " qualquer é primo se e somente se (" "p" " - 1)! + 1 for divisível por " "p" ". O teorema de Wilson é um teste de primalidade, ou seja, qualquer número " "p" " que não respeite o teorema não é primo."
+.SS Prova
+.RI "Digamos que " "N" " é um conjunto de inteiros de 1 até (" "p" " - 1):"
+\n
+.EX
+.IR "N" " = { 1, 2, 3, 4, 5, ..., " "p" " - 1 }"
+.EE
+\n
+.RI "Se " "p" " for um número primo, para todo inteiro " "a" " do conjunto " "N" ", podemos dizer que existe um outro inteiro " "b" " que não conhecemos tal que:"
+\n
+.EX
+.IR "ab" " = 1 mod " "p"
+.IR "ab" " % " "p" " = " "1"
+.EE
+\n
+.RI "Para que " "a" " = " "b" " e que o resto da divisão seja = 1, " "a" " = 1 ou " "a" " = (" "p" " - 1). Podemos agrupar os outros inteiros possíveis do conjunto " "N" " em um novo conjunto " "M" ", portanto:"
+\n
+.EX
+.IR "M" " = { 2, 3, 4, ..., " "p" " - 2 } <- tiramos o 1 e (" "p" " - 1)"
+\n
+.RI "2 * 3 * 4 * ... * (" "p" " - 2) = 1 mod " "p"
+.RI "(" "p" " - 2)! = 1 mod " "p"
+.EE
+\n
+.RI "Completamos a prova do teorema multiplicando a equação por (" "p" " - 1):"
+\n
+.EX
+.RI "(" "p" " - 2)! (" "p" " - 1) = (" "p" " - 1) mod " "p"
+.RI "(" "p" " - 1)! = -1 mod " "p"
+.EE
+.SS Exemplos
+.R \&
+\n
+.EX
+.RI "[(" "5" " - 1)! + 1] % " "5" " = (4! + 1) % " "5" " = 25 % " "5" " = 0 <- é primo"
+.RI "[(" "4" " - 1)! + 1] % " "4" " = (3! + 1) % " "4" " = 6 % " "4" " = 2 <- não é primo"
+.EE
+.SH PEQUENO TEOREMA DE FERMAT
+\&\n
+.SS Definição
+.EX
+.IR "a" "^" "p" " = " "a" " mod " "p"
+.IR "a" "^(" "p" " - 1) = 1 mod " "p"
+.EE
+\n
+.RI "Sendo " "p" " e " "a" " primos entre si, ou seja, se " "p" " é um número primo e mdc (" "a" ", " "p" ") = 1. O pequeno teorema de Fermat é outro teste de primalidade, portanto qualquer número " "p" " que não respeite o teorema não é primo."
+.SS Prova
+.RI "É possível provar o teorema de várias maneiras, uma delas é utilizando a aritmética modular. Digamos que " "N" " é um conjunto de múltiplos de " "a" " até (" "p" " - 1)" "a" " sendo " "a" " não divisível por " "p" " e " "p" " um número primo qualquer: "
+\n
+.EX
+.IR "N" " = { " "a" ", 2" "a" ", 3" "a" ", ..., (" "p" " - 1)" "a" " }"
+.EE
+\n
+.RI "Reduzindo cada elemento por módulo " "p" ", conseguimos o conjunto " "M" ":"
+\n
+.EX
+.IR "M" " = { 1, 2, 3, ..., (" "p" " - 1) }"
+.EE
+\n
+.R "Ou seja, em outra palavras, temos:"
+\n
+.EX
+.IR "a" " * 2" "a" " * 3" "a" " * ... * (" "p" " - 1)" "a" " = 1 * 2 * 3 * ... * (" "p" " - 1) mod " "p"
+.IR "a" "^(" "p" " - 1) * (" "p" " - 1)\fB!\fR = (" "p" " - 1)\fB!\fR mod " "p"
+.EE
+\n
+.RI "Como (" "p" " - 1)\fB!\fR não é divisível por " "p" ", podemos anulá-lo de ambos os lados completando então a prova do teorema:"
+\n
+.EX
+.IR "a" "^(" "p" " - 1) = 1 mod " "p"
+.EE
+.SH FUNÇÃO TOCIENTE DE EULER
+\&\n
+.SS Definição
+.RI "\fBF\fR(" "a" ") = (" "p_1" "^" "e_1" " - " "p_1" "^" "e_0" ") * (" "p_2" "^" "e_2" " - " "p_2" "^" "e_1" ") * ... * (" "p_n" "^" "e_n" " - " "p_n" "^" "e_n-1" ")"
+\n
+.RI "Sendo " "n" " a quantidade de fatores primos " "p" " da fatoração de " "a" " e " "e" " seus respectivos expoentes."
+.SS Propriedade
+.RI "\fBF\fR(" "p" ") = " "p" " - 1"
+\n
+.RI "Caso " "p" " for um número primo."
+.SS Exemplos
+.R \&
+\n
+.EX
+.IR "a" " = 240 = 16 * 15 = " "2^4" " * " "3" " * " "5" " <- fatoração"
+.RI "\fBF\fR(" "240" ") = (" "2^4" " - " "2^3" ") * (" "3^1" " - " "3^0" ") * (" "5^1" " - " "5^0" ") = 8 * 2 * 4 = 64"
+\n
+.IR "a" " = " "7" " <- número primo"
+.RI "\fBF\fR(" "7" ") = (" "7^1" " - " "7^0" ") = 6"
+.EE
+.SH TEOREMA DE FERMAT-EULER
+\&\n
+.SS Definição
+.IR "a" "^\fBF\fR(" "p" ") = 1 mod " "p"
+\n
+.RI "Sendo " "p" " um número primo e se " "a" " e " "p" " forem primos entre si, ou seja, se mdc (" "a" ", " "p" ") = 1."
+.SS Prova
+.R "Podemos provar esse teorema fazendo uma relação entre a propriedade da função tociente para números primos e o pequeno teorema de Fermat:"
+\n
+.EX
+.RI "\fBF\fR(" "p" ") = " "p" " - 1"
+.IR "a" "^(" "p" " - 1) = 1 mod " "p"
+.EE
+.SH ALGORITMO DE EUCLIDES ESTENDIDO
+\&\n
+.SS Definição (Identidade de Bézout)
+.IR "ax" " + " "by" " = mdc (" "a" ", " "b" ")"
+\n
+.RI "Sendo " "a" " e " "b" " inteiros diferentes de zero. Dados os valores de " "a" " e " "b" ", o algoritmo de euclides estendido é responsável por encontrar o mdc (" "a" ", " "b" "), " "x" " e " "y" "."
+.SS Exemplo
+.R \&
+\n
+.EX
+.RI "|1| " "17" " * " "x" " + " "40" " * " "y" " = mdc (" "17" ", " "40" ")"
+.RI "|2| " "40" " = 2 * " "17" " + 6"
+.RI "|3| " "17" " = 2 * 6 + 5"
+.RI "|4| 6 = 1 * 5 + 1 <- caso o resto seja 1, então mdc (" "a" ", " "b" ") = 1"
+\n
+.R "1 = 6 + 5 * (-1)"
+.RI "1 = 6 + [" "17" " + 6 * (-2)] * (-1) <- substituindo 5 por |3|"
+.RI "1 = " "17" " * (-1) + 6 * 3 <- a equação possui -1 vezes o 17 e 3 vezes o 6"
+.RI "1 = " "17" " * (-1) + [" "40" " + " "17" " * (-2)] * 3 <- substituindo 6 por |2|"
+.RI "1 = " "17" " * (-7) + " "40" " * 3 <- a equação acima possui -7 * 17 e 3 * 40"
+\n
+.IR "17" " * (-7) + " "40" " * 3 = 1"
+.IR "17" " * " "x" " + " "40" " * " "y" " = 1"
+.IR "x" " = -7 e " "y" " = 3"
+.EE
+.SH ALGORITMO RSA
+\&\n
+.SS Etapa 1: Gerar o modulus n
+.IR "n" " = " "p" " * " "q"
+\n
+.RI "A primeira etapa do algoritmo RSA é escolher dois números primos aleatórios " "p" " e " "q" " para gerar o modulus " "n" "."
+.SS Etapa 2: Calcular o tociente do modulus F(n)
+.RI "\fBF\fR(" "n" ") = (" "p" " - 1) * (" "q" " - 1)"
+\n
+.RI "Após isso, precisamos calcular o tociente do modulus " "n" "."
+.SS Etapa 3: Gerar o parâmetro e
+.RI "1 < " "e" " < \fBF\fR(" "n" ") | mdc (" "e" ", \fBF\fR(" "n" ")) = 1"
+\n
+.RI "O terceiro passo é gerar o parâmetro " "e" " de tal forma que seja menor e coprimo do tociente do modulus \fBF\fR(" "n" ")."
+.SS Etapa 4: Calcular o parâmetro d
+.EX
+.IR "ed" " = 1 mod \fBF\fR(" "n" ")"
+.IR "e" " * " "d" " + \fBF\fR(" "n" ") * " "y" " = 1"
+\n
+.RI "O parâmetro " "d" " é calculado via algoritmo de Euclides estendido."
+.EE
+.SS Etapa 5: Função criptográfica
+.EX
+.RI "\fBE\fR(" "x" ") = " "x" "^" "e" " mod " "n"
+.RI "\fBD\fR(" "x" ") = \fBE\fR(" "x" ")^" "d" " mod " "n"
+.EE
+\n
+.RI "E por fim, uma mensagem " "x" " é criptografada utilizando a função criptográfica \fBE\fR(" "x" ") e descriptografada com \fBD\fR(" "x" "). Por final, temos:"
+\n
+.EX
+.RI "O par (" "e" ", " "n" ") como a chave pública."
+.RI "A tripla (" "p" ", " "q" ", " "d" ") como a chave privada."
+.EE
+.SS Exemplo
+.R \&
+\n
+.EX
+.IR "p" " = 11 e " "q" " = 13 <- escolhemos os valores de p e q"
+.IR "n" " = " "p" " * " "q"
+.IR "n" " = 11 * 13 = 143"
+\n
+.RI "\fBF\fR(" "n" ") = (" "p" " - 1) * (" "q" " - 1)"
+.RI "\fBF\fR(" "n" ") = (11 - 1) * (13 - 1) = 120"
+\n
+.RI "1 < " "e" " < \fBF\fR(" "n" ") | mdc (" "e" ", \fBF\fR(" "n" "))"
+.IR "e" " = 7 <- escolhemos o valor de e"
+\n
+.IR "ed" " = 1 mod \fBF\fR(" "n" ")"
+.IR "e" " * " "x" " + \fBF\fR(" "n" ") * " "y" " = 1"
+.IR "7" " * " "x" " + " "120" " * " "y" " = 1"
+\n
+.IR "120" " = 17 * " "7" " + 1 <- aplicando o algoritmo de Euclides estendido"
+\n
+.RI "1 = " "120" " + (-7 * 17)"
+.RI "1 = " "120" " * 1 + " "7" " * (-17)"
+.IR "x" " = -17 e " "y" " = 1"
+\n
+.RI "Digamos que a mensagem " "x" " seja 9:"
+\n
+.RI "\fBE\fR(" "x" ") = " "x" "^" "e" " mod " "n"
+.RI "\fBE\fR(" "9" ") = " "9" "^" "7" " mod " "143"
+.RI "\fBE\fR(" "9" ") = 4782969 mod " "143"
+.RI "\fBE\fR(" "9" ") = 48"
+.EE
+\n
+.RI "Portanto a mensagem cifrada de 9 é 43."
+.SH VEJA TAMBÉM
+.R "Outras man pages estão disponíveis em:"
+.UR https://github.com/charlesfrancois/paranoid-guide
+.UE
+.SH AUTOR
+.R Charles François, 
+.UR https://t.me/charlesfrancois
+.UE

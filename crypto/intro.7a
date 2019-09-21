@@ -1,0 +1,196 @@
+.TH INTRO 7a "Setembro 12, 2019" "FHOS 0.1" "Paranoid Information Manual"
+.SH NOME
+.BR "intro" " - introdução a teoria dos números"
+.SH CONJUNTOS NÚMÉRICOS
+\&\n
+.SS Definição
+.EX
+.BR "C" " Complexos { " "R" " Reais { " "Q" " Racionais { " "Z" " inteiros { " "N" " Naturais"
+.R "            {         {             {            { + Z_-"
+.R "            {         {             { + Fracionários"
+.R "            {         {"
+.R "            {         { + Irracionais"
+.R "            { + Imaginários"
+.EE
+\n
+.RB "Números podem ser classificados de acordo com um conjunto númérico, que vem a ser uma coleção de elementos. Dentre eles, a teoria dos números abrange somente o conjunto dos inteiros " "Z" "."
+\n
+.EX
+.BR "Z" " = { ... , -3, -2, -1, 0, 1, 2, 3, ... }
+.BR "Z*" " = " "Z" " - { 0 }"
+.EE
+.SH INTERSEÇÃO
+\&\n
+.SS Definição
+.BR "I" "(\fIA\fR,"
+.IR "B" ") = { x | x E " "A" " ^ x E " "B" " }"
+\n
+.RB "É um conjunto de elementos que, simultaneamente, pertecem a dois ou mais conjuntos, representados pela função " "I" "."
+\n
+.SS Exemplo
+.R \&
+\n
+.EX
+.IR "A" " = { 1, 2, 3, 4, 5 }"
+.IR "B" " = { 2, 4, 6, 8, 10 }"
+.RI "\fBI\fR(" "A" ", " "B" ") = { 2, 4 }"
+.EE
+.SH CONJUNTO DOS DIVISORES
+\&\n
+.SS Definição
+.BR "D" "(\fIa\fR)"
+.RI " = { x,y E Z* | " "a" " / x = y ^ " "a" " / y = x }"
+\n
+.RI "É um conjunto finito de elementos que dividem " "a" " de tal forma que os resultados são números inteiros, ou seja, é um conjunto que contém os divisores de " "a" "."
+.SS Propriedades
+.R \&
+\n
+.RI "V" "a" ": 1," "a" " E \fBD\fR(" "a" ")"
+\n
+.RI "Para qualquer número " "a" ", 1 e " "a" " serão divisores de " "a" "."
+\n
+.EX
+.RI "\fBD\fR(" "a" ") = { -1, -" "a" ", 1, " "a" " }"
+.EE
+\n
+.RI "Dizemos que " "a" " é um número primo se ele possuir somente 1 e ele mesmo como seus divisores."
+.SS Exemplos
+.R \&
+\n
+.EX
+.RI "\fBD\fR(" "23" ") = { 1, 23 } <- é um número primo"
+.RI "\fBD\fR(" "10" ") = { 1, 2, 5, 10 }"
+.RI "\fBD\fR(" "15" ") = { 1, 3, 5, 15 }"
+.EE
+.SH MAIOR DIVISOR COMUM (MDC)
+\&\n
+.SS Definicão
+.B "mdc"
+.RI "(" "a" ", " "b" ")" " " "= " "m" " = máx \fBI\fR(\fBD\fR(" "a" "), \fBD\fR(" "b" "))"
+\n
+.IR "m" " é um elemento que divide " "a" " e " "b" " de tal forma que qualquer outro divisor x comum de " "a" " e " "b" " é um divisor de " "m" ", ou seja, " "m" " é o maior divisor comum de " "a" " e " "b" "."
+.SS Propriedade
+.B "mdc"
+.RI "(" "a" ", " "b" ")" " " "= 1"
+\n
+.RI "Se " "m" " = 1, então dizemos que " "a" " e " "b" " são coprimos (primos entre si). Em outras palavras, " "a" " e " "b" " são números diferentes e pelo menos um deles é primo."
+.SS Exemplos
+.R \&
+\n
+.EX
+.BR "mdc" " (\fI3\fR, \fI9\fR) = 3"
+.BR "mdc" " (\fI6\fR, \fI9\fR) = 3"
+.BR "mdc" " (\fI11\fR, \fI14\fR) = 1 <- são primos entre si"
+.BR "mdc" " (\fI10\fR, \fI15\fR) = 5"
+.EE
+.SH ARITMÉTICA MODULAR
+\&\n
+.SS Definição
+.IR "a" " = " "b" " \fBmod\fR " "n" " <=> " "a" " = k" "n" " + " "b"
+\n
+.RI "Para um inteiro positivo " "n" ", dois inteiros " "a" " e " "b" " são ditos congruentes (ou côngruos) \fBmódulo\fR " "n" " quando " "a" " - " "b" " é um inteiro múltiplo de " "n" ". Explicando de outra forma, seria como definir uma operação de divisão dessa maneira:"
+\n
+\n
+.EX
+.IR "dividendo" " / " "divisor" " = " "resultado" " (sobrando o " "resto" ")"
+.IR "dividendo" " % " "divisor" " = " "resto" " <- ignorando o " "resultado"
+.IR "dividendo" " = " "resto" " \fBmod\fR " "divisor"
+.EE
+.SS Exemplos
+.R \&
+\n
+.EX
+.IR "5" " / " "2" " = " "2" " (sobrando " "1" ")"
+.IR "5" " % " "2" " = " "1" " <- ignorando o resultado " "2"
+.IR "5" " = " "1" " \fBmod\fR " "2" " <=> " "5" " = " "2" " * " "2" " + " "1"
+\n
+.IR "9" " / " "7" " = " "1" " (sobrando " "2" ")"
+.IR "9" " % " "7" " = " "2" " <- ignorando o resultado " "1"
+.IR "9" " = " "2" " \fBmod\fR " "7" " <=> " "9" " = " "1" " * " "7" " + " "2"
+.EE
+.SS Progressão Aritmética
+.BR "a_n" " = "
+.IR "a_1" " + (" "n" " - 1) * " "r"
+\n
+.RI "A PA é uma sequência númerica em que cada termo " "a_n" ", a partir do segundo, é igual à soma do termo anterior " "a_n-1" " com uma constante " "r" " (razão). Podemos reorganizá-la e fazer um sistema com a definição da aritmética modular:"
+\n
+.EX
+.IR "a" " = k * " "n" " + " "b" " <=> " "a" " = " "b" " mod " "n"
+.IR "a_n" " = (" "n" " - 1) * " "r" " + " "a_1" " <=> " "a_n" " = " "a_1" " mod " "r"
+.EE
+\n
+.RI "Portanto chegamos a conclusão que " "r" " = " "n" " e " "a_1" " = " "resto" ", ou seja, podemos utilizar aritmética modular para resolver progressões aritméticas se soubermos a razão " "r" " e algum valor de " "a_n" "."
+.SS Exemplos
+.R \&
+\n
+.RI "Digamos que você queira descobrir se no ano " "X" " irá acontecer a copa do mundo masculina. Primeiramente precisamos descobrir a razão " "r" ", que nesse caso é 4 (pois a copa é de 4 em 4 anos). Depois, precisamos descobrir algum ano em que a copa aconteceu (a última foi em 2018 por exemplo, " "a_n" " = 2018). Utilizando aritmética modular, podemos rapidamente descobrir qual é o primeiro termo da progressão:
+\n
+\n
+.EX
+.IR "2018" " = " "a_1" " mod " "4" " => " "a_1" " = " "2"
+.IR "2018" " = " "2" " mod " "4"
+.EE
+\n
+.RI "Então, para verificar se no ano " "X" " terá copa do mundo masculina, é só dividir por 4 e verificar se o resto é igual a 2. Exemplo com " "X" " = 4006:"
+\n
+.EX
+.IR "2018" " = " "2" " mod " "4"
+.IR "4006" " = " "resto" " mod " "4"
+\n
+.IR "4006" " % " "4" " = " "2" " <- resto deu 2, então vai acontecer em 4006"
+.EE
+\n
+.RI "Mais um exemplo: eleições francesas. Elas acontecem de 5 em 5 anos (" "r" " = 5) e o atual presidente da França, Emmanuel Macron, foi eleito em 2017. Teremos eleições na França em 2085?"
+\n
+.EX
+.IR "2017" " = " "a_1" " mod " "5"
+.IR "a_1" " = " "2" " <- para acontecer, resto deve ser 2
+\n
+.IR "2017" " = " "2" " mod " "5"
+.IR "2085" " = " "resto" " mod " "5"
+\n
+.IR "2085" " % " "5" " = " "0" " <- resto deu 0, então não"
+.EE
+.SH FUNÇÃO CRIPTOGRÁFICA AFIM
+\&\n
+.SS Definição
+.BI "E(" "x" ")"
+.RI "= " "ax" " + " "b" " mod " "m"
+\n
+.RI "Como o próprio nome sugere, é a utilização de uma função afim para criptografar alguma mensagem " "x" ". Os parâmetros " "a" " e " "b" " são as chaves e " "m" " a quantidade de letras no alfabeto em que a mensagem foi escrita."
+.SS Condições de existência
+.R \&
+\n
+.EX
+.IR "b" " < " "m"
+.RI "mdc (" "a" ", " "m" ") = 1"
+.EE
+\n
+.IR "a" " e " "m" " devem ser primos entre si para que dois valores (duas letras) diferentes do alfabeto " "m" " não tenham o mesmo valor em \fBE(\fIx\fB)\fR."
+.SS Observação em relação a segurança
+.R \&
+\n
+.RI "Levando em consideração a segunda condição de existência, é recomendado que você adote um número primo para " "m" ", aumentando assim os valores possíveis para " "a" ", pois mdc (" "a" ", " "m" ") sempre será = 1.
+.SS Exemplo
+.R \&
+\n
+.RI "Digamos que eu adote os seguintes parâmetros " "a" " e " "b" " para a função criptográfica \fBE(\fIx\fB)\fR, o seguinte alfabeto " "m" " e a seguinte mensagem " "x" ":"
+\n
+.EX
+.IR "m" " = 'abcdefghijklmnopqrstuvwxyz, .' = 29"
+.IR "x" " = 'oi' = 15 e 9"
+.RI "\fBE(\fIx\fB)\fR = " "5" "x + " "8" " mod " "29"
+\n
+.R "\fBE(\fI15\fB)\fR = 5 * 15 + 8 mod 29 => \fBE(\fI15\fB)\fR = 'y'"
+.R "\fBE(\fI9\fB)\fR = 5 * 9 + 8 mod 29 => \fBE(\fI9\fB)\fR = 'x'"
+.EE
+\n
+.RI "Portanto a mensagem criptografada será 'yx'."
+.SH VEJA TAMBÉM
+.R "Outras man pages talvez estejam disponíveis em:"
+.UR https://github.com/charlesfrancois/paranoid-guide
+.UE
+.SH AUTOR
+.R "Charles François,"
+.UR https://t.me/charlesfrancois
+.UE
